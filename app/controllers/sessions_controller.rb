@@ -10,7 +10,7 @@ class SessionsController < ApplicationController
   		  if @user.email=="admin@gmail.com"
   			  redirect_to users_path
   		  else
-         flash[:success] ="user is succesfully logged in"
+         flash[:success] ="user successfully logged in"
   		   redirect_to  welcome_path
   	    end
   	  else 

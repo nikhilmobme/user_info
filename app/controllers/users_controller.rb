@@ -9,11 +9,27 @@ class UsersController < ApplicationController
   end
   
   def show
-    @user=User.find(params[:id])
+    if session[:user_id] !=nil
+      @user=User.find(params[:id])
+    else
+      flash[:failure] ="Invalid url"
+      redirect_to root_path
+    end
   end
   
   def index
-    @user=User.all
+    if session[:user_id] !=nil
+      @user_auth=User.find(session[:user_id])
+      if(@user_auth.email=="admin@gmail.com")
+        @user=User.all
+      else
+        flash[:failure] ="Invalid url"
+        redirect_to root_path
+      end
+    else
+      flash[:failure] ="Invalid url"
+      redirect_to root_path
+    end
   end
 
   def create
@@ -21,18 +37,14 @@ class UsersController < ApplicationController
       redirect_to new_user_path
       flash[:failure] ="email already exists"
     else
-    @user=User.new(user_params)
-     # if u=User.find_by(:emall =>@user.email)
-           # redirect_to new_user_path
-            #flash[:failure] ="email alradt exists"
-      #else
-    if(@user.save)
-      redirect_to login_path
-      flash[:success] ="User Registered Successfully"
-    else
-      render 'new'
+      @user=User.new(user_params)
+      if(@user.save)
+        redirect_to login_path
+        flash[:success] ="User Registered Successfully"
+      else
+        render 'new'
+       end
     end
-  end
   end
  
   def update
