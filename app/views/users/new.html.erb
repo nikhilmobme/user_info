@@ -1,0 +1,30 @@
+<%=form_for @user, url: users_path,method: :post do |f| %>
+  <% if @user.errors.any? %>
+    <ul>
+      <div class="alert alert-danger">
+        <% @user.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </div>
+    </ul>
+  <% end %>
+  <h1>New user</h1>
+    <div class="col-md-8 col md-offset-3 well">
+      <p>
+        <%= f.label :name %><br>
+        <%=f.text_field(:name, {:class=>'form-control'}) %>
+      </p>
+      <p>
+        <%= f.label :email %><br>
+        <%=f.text_field(:email, {:class=>'form-control'}) %>
+      </p>
+      <p>
+        <%= f.label :password %><br>
+        <%=f.password_field(:password, {:class=>'form-control'}) %>
+      </p>
+      <p>
+        <%=f.submit({:class=>"btn btn-success"})%>
+      </p>
+    </div>
+<%end%>
+

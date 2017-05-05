@@ -1,0 +1,28 @@
+<h1>Edit  User</h1>
+<%=form_for :user, url: user_path(@user), method: :patch do |f| %>
+  <% if @user.errors.any? %>
+    <ul>
+      <div class="alert alert-danger">
+        <% @user.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </div>
+    </ul>
+  <% end %>
+  <div class="col-md-8 col md-offset-3 well">
+    <p>
+      <%= f.label :name %><br>
+      <%=f.text_field(:name, {:class=>'form-control'}) %>
+    </p>
+    <p>
+      <%= f.label :email %><br>
+      <%=f.text_field(:email, {:class=>'form-control'}) %>
+    </p>
+    <p>
+      <%=f.submit({:class=>"btn btn-primary"})%>
+    </p>
+     <%=link_to "back", users_path, :class =>'btn btn-default'%>
+  </div>
+<%end%>
+
+    

@@ -1,0 +1,22 @@
+<% @user.each do|user|%>
+  <%next if user.email=="admin@gmail.com"%>
+  <div class="well">
+    <table height="80" width="50%" border="0" cellspacing="0">
+      <tr>
+        <th>Name</th>
+        <td><%=user.name%></td>
+      </tr>
+      <tr>
+        <th>Eamil</th>
+        <td><%=user.email%></td>
+      </tr>
+    </table>
+    <%=link_to "view", user_path(user), :class =>'btn btn-default'%>
+    <%=link_to "edit", edit_user_path(user), :class =>'btn btn-default'%>
+    <%=link_to "Delete",user_path(user), 
+                      method: :delete,
+                      data: {confirm: 'are you sure?'},
+                      :class =>'btn btn-danger'%>
+
+   </div>
+<%end%>
